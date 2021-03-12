@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping(value = "/movie", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class MovieController {
-    private MovieService movieService;
+    private final MovieService movieService;
 
     public List<Movie> findAll() {
         return movieService.findAll();
