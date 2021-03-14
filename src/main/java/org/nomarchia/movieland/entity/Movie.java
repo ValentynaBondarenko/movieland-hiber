@@ -1,16 +1,17 @@
 package org.nomarchia.movieland.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
 
-@Entity(name = "Movie")
+
 @Data
-@Table(name = "movies")
+@Builder
+@Entity(name = "Movie")
+@Table(name = "public.movies")
 public class Movie {
     @Id
-//    Check if that annotation is necessary
-//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "name_native", nullable = false)
     private String nameNative;
@@ -18,8 +19,6 @@ public class Movie {
     private String nameRussian;
     @Column(name = "year")
     private Integer yearOfRelease;
-    /*@Column(name = "description")
-    private String description;*/
     @Column(name = "rating")
     private Double rating;
     @Column(name = "price")
