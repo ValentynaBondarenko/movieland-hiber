@@ -1,15 +1,20 @@
 package org.nomarchia.movieland.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 
 import javax.persistence.*;
+import java.util.*;
 
 
 @Data
-@Builder
+//@Builder
 @Entity(name = "Movie")
 @Table(name = "public.movies")
+//@AllArgsConstructor
 public class Movie {
     @Id
     private Long id;
@@ -25,4 +30,12 @@ public class Movie {
     private Double price;
     @Column(name = "poster_img")
     private String picturePath;
+
+    @ManyToMany(cascade = { CascadeType.ALL }/*, targetEntity = org.nomarchia.movieland.entity.Genre.class*/)
+    @JoinTable(
+            name = "movie_to_genre",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+            )
+    private List<Genre> genres;
 }

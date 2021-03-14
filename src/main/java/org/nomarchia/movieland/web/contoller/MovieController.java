@@ -14,20 +14,22 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/movie", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/movie")
 @RequiredArgsConstructor
 public class MovieController {
     private final MovieService movieService;
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Movie> findAll() {
         return movieService.findAll();
     }
 
+    @GetMapping(value = "/random", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Movie> findRandom() {
         return movieService.findRandom();
     }
 
-    @GetMapping("/genre/{genreId}")
+    @GetMapping(value = "/genre/{genreId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Movie> findByGenre(@PathVariable Long genreId) {
         return movieService.findByGenre(genreId);
     }

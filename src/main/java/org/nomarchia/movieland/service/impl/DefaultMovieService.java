@@ -1,10 +1,9 @@
 package org.nomarchia.movieland.service.impl;
 
-import checkers.propkey.quals.PropertyKey;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
+
 import org.nomarchia.movieland.config.HibernateUtil;
 import org.nomarchia.movieland.entity.Movie;
 import org.nomarchia.movieland.repository.MovieRepository;
@@ -36,14 +35,17 @@ public class DefaultMovieService implements MovieService {
 
     @Override
     public List<Movie> findRandom() {
-        Session session = HibernateUtil.getSession();
         String queryString = "SELECT m FROM Movie m ORDER BY random()";
+        Session session = HibernateUtil.getSession();
 
         return session.createQuery(queryString, Movie.class).setMaxResults(moviesAmount).list();
     }
 
     @Override
     public List<Movie> findByGenre(Long genreId) {
-        return null;
+        String queryString = "SELECT m FROM Movie m join m.genres g where g.id = :genreId";
+        Session session = HibernateUtil.getSession();
+
+        return session.createQuery(queryString, Movie.class).setParameter("genreId", genreId).list();
     }
 }
