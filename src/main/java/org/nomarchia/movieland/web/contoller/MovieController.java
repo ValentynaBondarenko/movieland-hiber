@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.nomarchia.movieland.entity.Movie;
 import org.nomarchia.movieland.service.MovieService;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,4 +23,12 @@ public class MovieController {
         return movieService.findAll();
     }
 
+    public List<Movie> findRandom() {
+        return movieService.findRandom();
+    }
+
+    @GetMapping("/genre/{genreId}")
+    public List<Movie> findByGenre(@PathVariable Long genreId) {
+        return movieService.findByGenre(genreId);
+    }
 }
