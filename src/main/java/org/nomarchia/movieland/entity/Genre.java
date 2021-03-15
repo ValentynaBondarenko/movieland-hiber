@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -15,4 +16,7 @@ public class Genre {
     private Long id;
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(/*cascade = {CascadeType.ALL}, */mappedBy = "genres"/*, targetEntity = org.nomarchia.movieland.entity.Movie.class*/)
+    private Set<Movie> movieSet;
 }
