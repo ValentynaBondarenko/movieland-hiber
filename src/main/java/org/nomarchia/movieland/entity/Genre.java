@@ -10,7 +10,6 @@ import java.util.Set;
 @Entity
 @Table(name = "genres")
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Genre {
     @Id
     private Long id;

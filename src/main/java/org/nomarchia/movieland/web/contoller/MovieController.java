@@ -39,12 +39,10 @@ public class MovieController {
     }
 
     public SortedMoviesRequest processOrderBy(SortingOrder ratingOrder, SortingOrder priceOrder) {
-        SortedMoviesRequest moviesRequest = ratingOrder != null
-                ? SortedMoviesRequest.builder().sortingOrder(ratingOrder).sortingParameter(SortingParameter.RATING).build()
-                : priceOrder != null
-                ? SortedMoviesRequest.builder().sortingOrder(priceOrder).sortingParameter(SortingParameter.PRICE).build()
-                : null;
-
-        return moviesRequest;
+        return ratingOrder != null ?
+            SortedMoviesRequest.builder().sortingOrder(ratingOrder).sortingParameter(SortingParameter.RATING).build() :
+            priceOrder != null ?
+            SortedMoviesRequest.builder().sortingOrder(priceOrder).sortingParameter(SortingParameter.PRICE).build() :
+            null;
     }
 }

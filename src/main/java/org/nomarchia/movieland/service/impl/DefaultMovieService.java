@@ -28,7 +28,7 @@ import static org.nomarchia.movieland.common.SortingParameter.*;
 @RequiredArgsConstructor
 public class DefaultMovieService implements MovieService {
     private final MovieRepository movieRepository;
-    @Value("${random.movies.amount :3}")
+    @Value("${random.movies.amount:3}")
     private Integer moviesAmount;
 
     @Override

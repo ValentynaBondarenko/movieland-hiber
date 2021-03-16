@@ -1,6 +1,9 @@
 package org.nomarchia.movieland.service.impl;
 
+import com.github.database.rider.core.api.configuration.DBUnit;
+import com.github.database.rider.core.api.configuration.Orthography;
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.junit5.api.DBRider;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.nomarchia.movieland.MovielandApplicationContext;
@@ -9,15 +12,17 @@ import org.nomarchia.movieland.common.SortingParameter;
 import org.nomarchia.movieland.entity.Movie;
 import org.nomarchia.movieland.request.SortedMoviesRequest;
 import org.nomarchia.movieland.service.MovieService;
+import org.nomarchia.movieland.TestAppContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringJUnitWebConfig(MovielandApplicationContext.class)
+@DBRider
+@DBUnit(caseInsensitiveStrategy = Orthography.LOWERCASE)
+@SpringJUnitWebConfig(value = {TestAppContext.class, MovielandApplicationContext.class})
 class DefaultMovieServiceTest {
     @Autowired
     private MovieService movieService;
@@ -112,7 +117,7 @@ class DefaultMovieServiceTest {
 
     @DisplayName("Get movies by genre from DB order by rating ASC")
     @Test
-//    @DataSet(value = "movies_genres_and_movie_to_genre.xml")
+    @DataSet(value = "movies_genres_and_movie_to_genre.xml")
     void testFindByGenreRatingAsc() {
         //prepare
         SortedMoviesRequest request = SortedMoviesRequest.builder()
@@ -120,7 +125,7 @@ class DefaultMovieServiceTest {
                 .sortingParameter(SortingParameter.RATING)
                 .build();
         //when
-        List<Movie> actualMovies = movieService.findByGenre(1L, request);
+        List<Movie> actualMovies = movieService.findByGenre(5L, request);
 
         //then
         assertNotNull(actualMovies);

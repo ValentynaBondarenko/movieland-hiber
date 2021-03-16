@@ -1,3 +1,8 @@
+CREATE TABLE genres (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+    );
+
 CREATE TABLE movies (
     id SERIAL PRIMARY KEY,
     name_native VARCHAR(200) NOT NULL,
@@ -8,11 +13,6 @@ CREATE TABLE movies (
     price DOUBLE PRECISION  NOT NULL,
     poster_img VARCHAR
 );
-
-CREATE TABLE genres (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
-    );
 
 CREATE TABLE movie_to_genre (
     column_id SERIAL PRIMARY KEY,

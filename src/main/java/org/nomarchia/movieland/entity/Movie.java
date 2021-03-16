@@ -13,7 +13,7 @@ import java.util.*;
 @Data
 //@Builder
 @Entity(name = "Movie")
-@Table(name = "public.movies")
+@Table(name = "movies")
 //@AllArgsConstructor
 public class Movie {
     @Id
@@ -37,5 +37,5 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id")
             )
-    private List<Genre> genres;
+    private Set<Genre> genres;
 }
